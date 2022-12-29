@@ -11,6 +11,7 @@ namespace AutoGermanaBackEnd.Application.Contracts
     public interface IProductoSaveAppService
     {
         string SaveOrUpdate(ProductInDTO productInDTO);
+        void updateState(Guid guid);
 
     }
 }

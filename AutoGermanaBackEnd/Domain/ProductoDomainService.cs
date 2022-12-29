@@ -1,5 +1,6 @@
 ﻿using AutoGermanaBackEnd.Domain.Contracts;
 using AutoGermanaBackEnd.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,8 @@ namespace AutoGermanaBackEnd.Domain
 
         public IEnumerable<producto> GetAll()
         {
-            return Context.productos;
+            return Context.productos
+                .Include(x => x.Categoria);
         }
 
         public IEnumerable<producto> GetByCategory(Guid idCategory)

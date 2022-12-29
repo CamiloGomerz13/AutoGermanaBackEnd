@@ -30,6 +30,12 @@ namespace AutoGermanaBackEnd.Controllers
             return _categoriaSaveAppService.SaveOrUpdate(categoriaInDTO);
         }
 
+        [HttpPost]
+        [Route(nameof(CategoriaController.UpdateState))]
+        public void UpdateState(Guid idCategoria)
+        {
+            _categoriaSaveAppService.UpdateState(idCategoria);
+        }
 
         [HttpGet]
         [Route(nameof(ProductoController.GetAll))]

@@ -25,14 +25,14 @@ namespace AutoGermanaBackEnd.Controllers
 
         [HttpPost]
         [Route(nameof(ProductoController.SaveOrUpdateProducto))]
-        public string SaveOrUpdateProducto(ProductInDTO productInDTO)
+        public string SaveOrUpdateProducto([FromBody]ProductInDTO productInDTO)
         {
             return _productoSaveAppService.SaveOrUpdate(productInDTO);
         }
 
         [HttpGet]
         [Route(nameof(ProductoController.GetAll))]
-        public List<producto> GetAll()
+        public List<ProductoWCatDTO> GetAll()
         {
             return _productoGetAppService.GetAll();
         }
@@ -46,7 +46,7 @@ namespace AutoGermanaBackEnd.Controllers
 
         [HttpGet]
         [Route(nameof(ProductoController.GetByCategory))]
-        public List<producto> GetByCategory(Guid idCategory)
+        public List<ProductoWCatDTO> GetByCategory(Guid idCategory)
         {
             return _productoGetAppService.GetByCategory(idCategory);
         }
@@ -56,6 +56,13 @@ namespace AutoGermanaBackEnd.Controllers
         public producto GetById(Guid idProducto)
         {
             return _productoGetAppService.GetById(idProducto);
+        }
+
+        [HttpPost]
+        [Route(nameof(ProductoController.updateState))]
+        public void updateState(Guid idProducto)
+        {
+            _productoSaveAppService.updateState(idProducto);
         }
 
     }

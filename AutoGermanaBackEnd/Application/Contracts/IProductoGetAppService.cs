@@ -10,8 +10,8 @@ namespace AutoGermanaBackEnd.Application.Contracts
     public interface IProductoGetAppService
     {
         ProductoStock GetProductStock(Guid guid); 
-        List<producto> GetByCategory(Guid guid);
-        List<producto> GetAll();
+        List<ProductoWCatDTO> GetByCategory(Guid guid);
+        List<ProductoWCatDTO> GetAll();
         producto GetById(Guid guid);
     }
 }

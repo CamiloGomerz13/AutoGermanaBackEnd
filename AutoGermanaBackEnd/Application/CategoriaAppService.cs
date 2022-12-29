@@ -39,7 +39,7 @@ namespace AutoGermanaBackEnd.Application
             try
             {
                 categoria categoria = mapper.Map<CategoriaInDTO, categoria>(categoriaInDTO);
-                if (categoriaInDTO.idCategoria.HasValue)
+                if (categoriaInDTO.idcategoria.HasValue)
                 {
                     _categoriaSaveDomainService.Update(categoria);
                     return "La categoria se ha actualizado correctamente";
@@ -52,6 +52,14 @@ namespace AutoGermanaBackEnd.Application
             {
                 return e.Message;
             }
+        }
+
+        public void UpdateState(Guid idCategoria)
+        {
+            categoria categoria1 = _categoriaGetDomainService.GetById(idCategoria);
+            categoria1.estado = !categoria1.estado;
+            _categoriaSaveDomainService.Update(categoria1);
+
         }
     }
 }

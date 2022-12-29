@@ -26,14 +26,16 @@ namespace AutoGermanaBackEnd.Application
             _productoGetDomainService = productoGetDomainService;
         }
 
-        public List<producto> GetAll()
+        public List<ProductoWCatDTO> GetAll()
         {
-            return _productoGetDomainService.GetAll().ToList();
+            List<ProductoWCatDTO> productos = mapper.Map<List<producto>,List<ProductoWCatDTO>>(_productoGetDomainService.GetAll().ToList());
+            return productos;
         }
 
-        public List<producto> GetByCategory(Guid idCategory)
+        public List<ProductoWCatDTO> GetByCategory(Guid idCategory)
         {
-            return _productoGetDomainService.GetByCategory(idCategory).ToList();
+            List<ProductoWCatDTO> productos = mapper.Map<List<producto>, List<ProductoWCatDTO>>(_productoGetDomainService.GetByCategory(idCategory).ToList());
+            return productos;
         }
 
         public producto GetById(Guid idProducto)
@@ -52,7 +54,7 @@ namespace AutoGermanaBackEnd.Application
             try
             {
                 producto producto = mapper.Map<ProductInDTO, producto>(productInDTO);
-                if (productInDTO.idProducto.HasValue)
+                if (productInDTO.idproducto.HasValue)
                 {
                     _productosSaveDomainService.Update(producto);
                     return "El producto se ha actualizado correctamente";
@@ -65,6 +67,13 @@ namespace AutoGermanaBackEnd.Application
             {
                 return e.Message;
             }
+        }
+
+        public void updateState(Guid idProducto)
+        {
+            producto producto = _productoGetDomainService.GetByID(idProducto);
+            producto.estado = !producto.estado;
+            _productosSaveDomainService.Update(producto);
         }
     }
 }
